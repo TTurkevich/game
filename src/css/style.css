@@ -1,0 +1,262 @@
+*,
+*::before,
+*::after {
+  padding: 0;
+  margin: 0;
+  border: 0;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
+}
+
+@font-face {
+  font-family: 'Stratos LC Web';
+  src: url("./stratos/StratosLCWeb-Regular.ttf");
+}
+
+.center {
+  padding-left: calc(50% - 600px);
+  padding-right: calc(50% - 600px);
+}
+
+body {
+  font-family: 'Stratos LC Web', sans-serif;
+  font-weight: 400;
+}
+
+.app {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  width: 100vw;
+  height: 100vh;
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+  background-color: #004980;
+}
+
+.app .container {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+}
+
+.app .container .container-start {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  background-color: #c2f5ff;
+  border-radius: 12px;
+  max-width: 480px;
+  max-height: 459px;
+  padding: 20px;
+}
+
+.app .container .container-start .title {
+  text-align: center;
+  height: 96px;
+  width: 208px;
+  color: #004980;
+  font-family: inherit;
+  font-weight: 400;
+  font-size: 40px;
+  line-height: 48px;
+}
+
+.app .container .container-start .level {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  gap: 24px;
+  margin-top: 48px;
+  margin-bottom: 67px;
+}
+
+.app .container .container-start .level .block {
+  width: 98px;
+  height: 98px;
+  background: white;
+  border-radius: 12px;
+  color: #0080c1;
+  font-family: inherit;
+  font-size: 64px;
+  line-height: 72px;
+}
+
+.app .container .container-start .level .block:hover {
+  -webkit-transform: scale(0.8);
+          transform: scale(0.8);
+  -webkit-transition: all 1s ease-out;
+  transition: all 1s ease-out;
+}
+
+@media (max-width: 425px) {
+  .app .container .container-start .level .block {
+    width: 80px;
+    height: 80px;
+  }
+}
+
+.app .container .memory-game {
+  max-height: 577px;
+  max-width: 975px;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+  gap: 15px;
+  -webkit-perspective: 1000px;
+          perspective: 1000px;
+}
+
+.app .container .memory-game .memory-card {
+  position: relative;
+  width: 95px;
+  height: 133px;
+  -webkit-transform-style: preserve-3d;
+          transform-style: preserve-3d;
+  -webkit-transform: scale(1);
+          transform: scale(1);
+  -webkit-transition: -webkit-transform 0.5s;
+  transition: -webkit-transform 0.5s;
+  transition: transform 0.5s;
+  transition: transform 0.5s, -webkit-transform 0.5s;
+}
+
+.app .container .memory-game .memory-card:active {
+  -webkit-transform: scale(0.97);
+          transform: scale(0.97);
+  -webkit-transition: -webkit-transform 0.2s;
+  transition: -webkit-transform 0.2s;
+  transition: transform 0.2s;
+  transition: transform 0.2s, -webkit-transform 0.2s;
+}
+
+.app .container .memory-game .memory-card.flip {
+  -webkit-transform: rotateY(180deg);
+          transform: rotateY(180deg);
+}
+
+.app .container .memory-game .front-face {
+  -webkit-transform: rotateY(180deg);
+          transform: rotateY(180deg);
+}
+
+.app .container .memory-game .front-face,
+.app .container .memory-game .back-face {
+  position: absolute;
+  border-radius: 5px;
+  background: #1c7ccc;
+  -webkit-backface-visibility: hidden;
+          backface-visibility: hidden;
+}
+
+.app .container .game-attributes {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  width: 100%;
+  padding-bottom: 35px;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+}
+
+.app .container .game-attributes .timer-game {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: column;
+          flex-direction: column;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  color: white;
+}
+
+.app .container .game-attributes .timer-game-title {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  font-size: 16px;
+  width: 155px;
+  -ms-flex-pack: distribute;
+      justify-content: space-around;
+}
+
+.app .container .game-attributes .timer-game-title-time {
+  width: 50%;
+  text-align: end;
+  padding-right: 11px;
+}
+
+.app .container .game-attributes .timer-game-user-time {
+  font-size: 64px;
+}
+
+.button {
+  width: 246px;
+  height: 50px;
+  background: #7ac100;
+  border-radius: 12px;
+  font-size: 24px;
+  color: white;
+  font-family: inherit;
+}
+
+.button:hover {
+  background-color: #417202;
+  -webkit-transition: all 1s ease-out;
+  transition: all 1s ease-out;
+}
+/*# sourceMappingURL=style.css.map */
