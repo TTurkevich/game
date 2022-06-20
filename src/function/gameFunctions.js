@@ -27,13 +27,19 @@ export function startGame() {
 function findFrontFaceCard(arr) {
     let newSrc
 
-    const suits = ['diamonds', 'hearts', 'spades', 'clubs']
-    const rank = ['6', '7', '8', '9', '10', 'jack', 'queen', 'king', 'ace']
-
-    for (let i = 0; i < suits.length; i++) {
-        for (let j = 0; j < rank.length; j++) {
-            newSrc = './css/img/cards/' + rank[j] + '-' + suits[i] + '.png'
-            arr.push({ suits: suits[i], rank: rank[j], newSrc: newSrc })
+    for (let i = 0; i < gameData.suits.length; i++) {
+        for (let j = 0; j < gameData.rank.length; j++) {
+            newSrc =
+                './css/img/cards/' +
+                gameData.rank[j] +
+                '-' +
+                gameData.suits[i] +
+                '.png'
+            arr.push({
+                suits: gameData.suits[i],
+                rank: gameData.rank[j],
+                newSrc: newSrc,
+            })
         }
     }
 
