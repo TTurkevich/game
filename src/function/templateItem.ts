@@ -67,7 +67,7 @@ export function startShellTemplate() {
     }
 }
 
-export function gameCardsFrontFaceTemplate(data) {
+export function gameCardsFrontFaceTemplate(data: any) {
     return {
         tag: 'div',
         cls: ['memory-card', 'flip'],
@@ -146,7 +146,7 @@ export function gameTimerTemplate() {
     }
 }
 
-export function resultTemplate(data) {
+export function resultTemplate(data: any) {
     return {
         tag: 'section',
         cls: 'result-container',

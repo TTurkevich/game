@@ -23,16 +23,18 @@ import {
 import { templateEngine } from './function/templating'
 import { renderScreen } from './render'
 
-function renderStartShell(container) {
+function renderStartShell(container: HTMLElement) {
     container.appendChild(templateEngine(startShellTemplate()))
 }
 
 gameData.blocks['start-shell'] = renderStartShell
 
-function renderStartLevelBlock(container) {
+function renderStartLevelBlock(container: HTMLElement) {
     container.appendChild(templateEngine(startLevelBlockTemplate()))
 
-    const levelButtons = document.querySelectorAll('[data-level]')
+    const levelButtons = document.querySelectorAll(
+        '[data-level]'
+    ) as NodeListOf<HTMLElement>
 
     levelButtons.forEach((levelButton) =>
         levelButton.addEventListener('click', () => setLevelGame(levelButton))
@@ -41,12 +43,11 @@ function renderStartLevelBlock(container) {
 
 gameData.blocks['start-level'] = renderStartLevelBlock
 
-function renderStartButton(container) {
+function renderStartButton(container: HTMLElement) {
     container.appendChild(templateEngine(startButtonTemplate()))
 
-    const start = document.querySelector('#start-button')
+    const start = document.querySelector('#start-button') as HTMLButtonElement
     start.addEventListener('click', function () {
-       
         startGame()
 
         setTimeout(getTime, 5000)
@@ -55,7 +56,7 @@ function renderStartButton(container) {
 
 gameData.blocks['start-button'] = renderStartButton
 
-function renderGameCardsFrontFace(container) {
+function renderGameCardsFrontFace(container: HTMLElement) {
     const memoryGame = document.createElement('section')
     memoryGame.classList.add('memory-game')
     memoryGame.setAttribute('id', 'memory-game')
@@ -63,7 +64,9 @@ function renderGameCardsFrontFace(container) {
 
     makeFrontFaceCards(memoryGame)
 
-    const cards = document.querySelectorAll('[data-rank]')
+    const cards = document.querySelectorAll(
+        '[data-rank]'
+    ) as NodeListOf<Element>
 
     shuffle(cards)
 
@@ -76,13 +79,12 @@ function renderGameCardsFrontFace(container) {
 
 gameData.blocks['game-CardsFrontFace'] = renderGameCardsFrontFace
 
-function renderGameButton(container) {
+function renderGameButton(container: HTMLElement) {
     container.appendChild(templateEngine(gameButtonTemplate()))
 
-    const restart = document.querySelector('#restart')
+    const restart = document.querySelector('#restart') as HTMLButtonElement
 
     restart.addEventListener('click', function () {
-        
         startGame()
         setTimeout(getTime, 5000)
     })
@@ -90,22 +92,22 @@ function renderGameButton(container) {
 
 gameData.blocks['game-button'] = renderGameButton
 
-function renderGameTimer(container) {
+function renderGameTimer(container: HTMLElement) {
     container.appendChild(templateEngine(gameTimerTemplate()))
 }
 
 gameData.blocks['game-timer'] = renderGameTimer
 
-function renderResultBlock(container, resultData) {
+function renderResultBlock(container: HTMLElement, resultData: any) {
     container.appendChild(templateEngine(resultTemplate(resultData)))
 }
 
 gameData.blocks['result-block'] = renderResultBlock
 
-function renderResultButton(container) {
+function renderResultButton(container: HTMLElement) {
     container.appendChild(templateEngine(resetButtonTemplate()))
 
-    const reset = document.querySelector('#reset')
+    const reset = document.querySelector('#reset') as HTMLButtonElement
 
     reset.addEventListener('click', function () {
         resetAllTimers()

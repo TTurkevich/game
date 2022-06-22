@@ -1,7 +1,7 @@
 import gameData from './game-data'
 import { resetAllTimers } from './function/gameFunctions'
 
-export function renderBlock(block, container, src, alt, data) {
+export function renderBlock(block: any, container: Element, src?: string, alt?: string, data?: any) {
     if (!gameData.blocks[block]) {
         console.log('no block')
     } else {
@@ -10,7 +10,7 @@ export function renderBlock(block, container, src, alt, data) {
     }
 }
 
-export function renderScreen(screen, data) {
+export function renderScreen(screen: any, data?: any) {
     resetAllTimers()
 
     if (!gameData.screens[screen]) {
