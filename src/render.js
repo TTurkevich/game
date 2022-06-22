@@ -1,5 +1,5 @@
-import gameData from './game-data.js'
-import { resetAllTimers } from './function/gameFunctions.js'
+import gameData from './game-data'
+import { resetAllTimers } from './function/gameFunctions'
 
 export function renderBlock(block, container, src, alt, data) {
     if (!gameData.blocks[block]) {

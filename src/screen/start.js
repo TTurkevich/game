@@ -1,4 +1,4 @@
-import { renderBlock, renderScreen } from '../render.js'
+import { renderBlock, renderScreen } from '../render'
 import gameData from '../game-data'
 
 function renderStartScreen() {

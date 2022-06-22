@@ -1,15 +1,14 @@
-import gameData from '../game-data.js'
-import { gameCardsFrontFaceTemplate } from '/src/function/templateItem.js'
-import { renderScreen } from '../render.js'
-import { templateEngine } from '/src/function/templating.js'
+import gameData from '../game-data'
+import { gameCardsFrontFaceTemplate } from './templateItem'
+import { renderScreen } from '../render'
+import { templateEngine } from './templating'
 
 export function setLevelGame(element) {
     const levelBox = gameData.levelBox
 
     for (let i = 0; i < levelBox.length; i++) {
         if (element.dataset.level === levelBox[i].level) {
-            gameData.level = levelBox[i]
-            console.log(gameData.level)
+            gameData.level = levelBox[i].cards
         }
     }
 }
@@ -24,8 +23,10 @@ export function startGame() {
     renderScreen('game-fontFace')
 }
 
-function findFrontFaceCard(arr) {
+function findFrontFaceCard() {
     let newSrc
+
+    const dataEntry = []
 
     for (let i = 0; i < gameData.suits.length; i++) {
         for (let j = 0; j < gameData.rank.length; j++) {
@@ -35,7 +36,7 @@ function findFrontFaceCard(arr) {
                 '-' +
                 gameData.suits[i] +
                 '.png'
-            arr.push({
+            dataEntry.push({
                 suits: gameData.suits[i],
                 rank: gameData.rank[j],
                 newSrc: newSrc,
@@ -43,19 +44,18 @@ function findFrontFaceCard(arr) {
         }
     }
 
-    return arr
+    return dataEntry
 }
 
 export function makeFrontFaceCards(container) {
-    const data = []
-    findFrontFaceCard(data)
+    const data = findFrontFaceCard()
 
     const shuffleData = data
         .map((value) => ({ value, sort: Math.random() }))
         .sort((a, b) => a.sort - b.sort)
         .map(({ value }) => value)
 
-    const newData = shuffleData.slice(0, window.application.level.cards / 2)
+    const newData = shuffleData.slice(0, gameData.level / 2)
 
     const deck = newData.concat(newData)
 
@@ -63,7 +63,7 @@ export function makeFrontFaceCards(container) {
 }
 
 export function shuffle(cards) {
-    const deckOfCards = gameData.level.cards
+    const deckOfCards = gameData.level
     cards.forEach((card) => {
         let randomPos = Math.floor(Math.random() * deckOfCards)
         card.style.order = randomPos
@@ -73,6 +73,10 @@ export function shuffle(cards) {
 export function flipCard() {
     if (gameData.lockBoard) return
     if (this === gameData.firstCard) return
+    if (this.classList.contains('flip')) {
+        alert('на перевернутых картах все могут...')
+        return
+    }
 
     this.classList.add('flip')
 
@@ -99,25 +103,19 @@ function disableCards() {
     gameData.firstCard.removeEventListener('click', flipCard)
     gameData.secondCard.removeEventListener('click', flipCard)
 
-    alert('Вы выиграли!')
     resetBoard()
 }
 
 function unflipCards() {
-    setTimeout(() => {
-        gameData.firstCard.classList.remove('flip')
-        gameData.secondCard.classList.remove('flip')
-        resetBoard()
-    }, 1500)
-
-    alert('Вы проиграли!')
+    resetBoard()
+    setLose()
 }
 
 function resetBoard() {
     gameData.hasFlippedCard = false
     gameData.lockBoard = false
-    gameData.firstCard = undefined
-    gameData.secondCard = undefined
+    gameData.firstCard = null
+    gameData.secondCard = null
 }
 
 export function removeClassFlip(item) {
@@ -136,7 +134,7 @@ function tick(date) {
     const oneHour = oneMinute * 60
 
     const now = new Date()
-    const elapsed = now - date
+    const elapsed = now.valueOf() - date.valueOf()
     const parts = []
 
     parts[0] = '' + Math.floor((elapsed % oneHour) / oneMinute)
@@ -151,7 +149,44 @@ function tick(date) {
     timer.textContent = parts.join('.')
 }
 
+function getTimeGame() {
+    const timer = document.querySelector('#user-time')
+
+    gameData.result[2].time = timer.textContent
+}
+
+export function checkResult() {
+    const deckOfCards = gameData.level
+    const flipCards = document.querySelectorAll('.flip')
+
+    if (flipCards.length === deckOfCards) {
+        getTimeGame()
+        resetAllTimers()
+
+        const resultData = gameData.result[0]
+
+        renderScreen('result-window', resultData)
+    }
+}
+
+function setLose() {
+    getTimeGame()
+    resetAllTimers()
+
+    const resultData = gameData.result[1]
+
+    renderScreen('result-window', resultData)
+}
+
 export default {
     setLevelGame,
     resetAllTimers,
+    startGame,
+    makeFrontFaceCards,
+    shuffle,
+    flipCard,
+    getTime,
+    removeClassFlip,
+    getTimeGame,
+    checkResult,
 }

@@ -8,7 +8,7 @@ import {
     getTime,
     removeClassFlip,
     resetAllTimers,
-} from '/src/function/gameFunctions.js'
+} from './function/gameFunctions'
 
 import {
     startLevelBlockTemplate,
@@ -16,9 +16,12 @@ import {
     startShellTemplate,
     gameButtonTemplate,
     gameTimerTemplate,
-} from '/src/function/templateItem.js'
+    resultTemplate,
+    resetButtonTemplate,
+} from './function/templateItem'
 
-import { templateEngine } from '/src/function/templating.js'
+import { templateEngine } from './function/templating'
+import { renderScreen } from './render'
 
 function renderStartShell(container) {
     container.appendChild(templateEngine(startShellTemplate()))
@@ -31,21 +34,19 @@ function renderStartLevelBlock(container) {
 
     const levelButtons = document.querySelectorAll('[data-level]')
 
-    for (let button of levelButtons) {
-        button.addEventListener('click', function () {
-            setLevelGame(button)
-        })
-    }
+    levelButtons.forEach((levelButton) =>
+        levelButton.addEventListener('click', () => setLevelGame(levelButton))
+    )
 }
 
 gameData.blocks['start-level'] = renderStartLevelBlock
 
-function renderStartButton(container, content) {
-    container.appendChild(templateEngine(startButtonTemplate(content)))
+function renderStartButton(container) {
+    container.appendChild(templateEngine(startButtonTemplate()))
 
     const start = document.querySelector('#start-button')
     start.addEventListener('click', function () {
-        resetAllTimers()
+       
         startGame()
 
         setTimeout(getTime, 5000)
@@ -63,6 +64,7 @@ function renderGameCardsFrontFace(container) {
     makeFrontFaceCards(memoryGame)
 
     const cards = document.querySelectorAll('[data-rank]')
+
     shuffle(cards)
 
     cards.forEach(function (card) {
@@ -80,7 +82,7 @@ function renderGameButton(container) {
     const restart = document.querySelector('#restart')
 
     restart.addEventListener('click', function () {
-        resetAllTimers()
+        
         startGame()
         setTimeout(getTime, 5000)
     })
@@ -93,3 +95,22 @@ function renderGameTimer(container) {
 }
 
 gameData.blocks['game-timer'] = renderGameTimer
+
+function renderResultBlock(container, resultData) {
+    container.appendChild(templateEngine(resultTemplate(resultData)))
+}
+
+gameData.blocks['result-block'] = renderResultBlock
+
+function renderResultButton(container) {
+    container.appendChild(templateEngine(resetButtonTemplate()))
+
+    const reset = document.querySelector('#reset')
+
+    reset.addEventListener('click', function () {
+        resetAllTimers()
+        renderScreen('start')
+    })
+}
+
+gameData.blocks['result-button'] = renderResultButton

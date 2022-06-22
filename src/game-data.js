@@ -3,8 +3,8 @@ const gameData = (window.application = {
     rank: ['6', '7', '8', '9', '10', 'jack', 'queen', 'king', 'ace'],
     hasFlippedCard: false,
     lockBoard: false,
-    firstCard: undefined,
-    secondCard: undefined,
+    firstCard: null,
+    secondCard: null,
     levelBox: [
         {
             level: 'light',

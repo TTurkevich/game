@@ -1,5 +1,6 @@
-import { renderBlock } from '../render.js'
+import { renderBlock } from '../render'
 import gameData from '../game-data'
+import { checkResult } from '../function/gameFunctions'
 
 function renderGameFontFaceScreen() {
     const container = document.querySelector('#container')
@@ -13,6 +14,22 @@ function renderGameFontFaceScreen() {
     renderBlock('game-button', gameAttributes)
 
     renderBlock('game-CardsFrontFace', container)
+
+    setTimeout(() => {
+        gameData.timers.push(setInterval(() => checkResult(), 500))
+    }, 6000)
 }
 
 gameData.screens['game-fontFace'] = renderGameFontFaceScreen
+
+function renderResultScreen(resultData) {
+    const container = document.querySelector('#container')
+
+    renderBlock('result-block', container, resultData)
+
+    const resultContainer = document.querySelector('#result-item')
+
+    renderBlock('result-button', resultContainer)
+}
+
+gameData.screens['result-window'] = renderResultScreen
