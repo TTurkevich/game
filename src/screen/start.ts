@@ -2,12 +2,12 @@ import { renderBlock, renderScreen } from '../render'
 import gameData from '../game-data'
 
 function renderStartScreen() {
-    const container = document.querySelector('#container') as Element
+    const container = document.getElementById('container') as HTMLElement
     container.textContent = ''
 
     renderBlock('start-shell', container)
 
-    const containerStart = document.querySelector('#start-box') as HTMLElement
+    const containerStart = document.getElementById('start-box') as HTMLElement
 
     renderBlock('start-level', containerStart)
 

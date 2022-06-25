@@ -6,15 +6,15 @@ import { templateEngine } from './templating'
 export function setLevelGame(element: HTMLElement) {
     const levelBox = gameData.levelBox
 
-    for (let i = 0; i < levelBox.length; i++) {
-        if (element.dataset.level === levelBox[i].level) {
-            gameData.level = levelBox[i].cards
+    for (let item of levelBox) {
+        if (element.dataset.level === item.level) {
+            gameData.level = item.cards
         }
     }
 }
 
 export function resetAllTimers() {
-    if (gameData.timers != null) {
+    if (gameData.timers !== null) {
         for (let item of gameData.timers) {
             clearInterval(item)
         }
@@ -28,13 +28,13 @@ export function startGame() {
 function findFrontFaceCard() {
     let newSrc: string
 
-    interface IDataEntry {
+    interface DataEntry {
         suits: string
         rank: string
         newSrc: string
     }
 
-    const dataEntry: IDataEntry[] = []
+    const dataEntry: DataEntry[] = []
 
     for (let i = 0; i < gameData.suits.length; i++) {
         for (let j = 0; j < gameData.rank.length; j++) {
@@ -63,7 +63,7 @@ export function makeFrontFaceCards(container: HTMLElement) {
         .sort((a, b) => a.sort - b.sort)
         .map(({ value }) => value)
 
-    if (gameData.level != null) {
+    if (gameData.level !== null) {
         const newData = shuffleData.slice(0, gameData.level / 2)
 
         const deck = newData.concat(newData)
@@ -74,8 +74,8 @@ export function makeFrontFaceCards(container: HTMLElement) {
     }
 }
 
-export function shuffle(cards: NodeListOf<Element>) {
-    if (gameData.level != null) {
+export function shuffle(cards: NodeList) {
+    if (gameData.level !== null) {
         const deckOfCards = gameData.level
         cards.forEach((card: any) => {
             let randomPos: number = Math.floor(Math.random() * deckOfCards)
@@ -139,7 +139,7 @@ export function removeClassFlip(item: HTMLElement) {
 export function getTime() {
     const startDate: Date = new Date()
 
-    if (gameData.timers != null) {
+    if (gameData.timers !== null) {
         gameData.timers.push(setInterval(() => tick(startDate), 1000 / 60))
     }
 }
@@ -160,13 +160,13 @@ function tick(date: Date) {
     parts[0] = parts[0].length === 1 ? '0' + parts[0] : parts[0]
     parts[1] = parts[1].length === 1 ? '0' + parts[1] : parts[1]
 
-    const timer = document.querySelector('#user-time') as HTMLElement
+    const timer = document.getElementById('user-time') as HTMLElement
 
     timer.textContent = parts.join('.')
 }
 
 function getTimeGame() {
-    const timer = document.querySelector('#user-time') as HTMLElement
+    const timer = document.getElementById('user-time') as HTMLElement
 
     gameData.result[2].time = timer.textContent
 }

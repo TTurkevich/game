@@ -3,7 +3,7 @@ import gameData from '../game-data'
 import { checkResult } from '../function/gameFunctions'
 
 function renderGameFontFaceScreen() {
-    const container = document.querySelector('#container') as Element
+    const container = document.getElementById('container') as HTMLElement
     container.textContent = ''
 
     const gameAttributes = document.createElement('section')
@@ -23,12 +23,12 @@ function renderGameFontFaceScreen() {
 gameData.screens['game-fontFace'] = renderGameFontFaceScreen
 
 function renderResultScreen(resultData: any) {
-    const container = document.querySelector('#container') as HTMLElement
+    const container = document.getElementById('container') as HTMLElement
 
     renderBlock('result-block', container, resultData)
 
-    const resultContainer = document.querySelector(
-        '#result-item'
+    const resultContainer = document.getElementById(
+        'result-item'
     ) as HTMLElement
 
     renderBlock('result-button', resultContainer)

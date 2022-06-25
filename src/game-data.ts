@@ -1,18 +1,18 @@
 declare const window: any
 
-interface IWindow {
+interface Window {
     suits: string[]
     rank: string[]
     hasFlippedCard: boolean
     lockBoard: boolean
     firstCard: null | HTMLElement
     secondCard: null | HTMLElement
-    levelBox: ILevelBox[]
-    result: IResult[]
+    levelBox: LevelBox[]
+    result: Result[]
     level: null | number
     timers: NodeJS.Timer[]
-    blocks: any
-    screens: any
+    blocks: Blocks
+    screens: Screens
     renderScreen: any
     renderBlock: any
 }
@@ -20,12 +20,12 @@ interface IWindow {
 const suits = ['diamonds', 'hearts', 'spades', 'clubs']
 const rank = ['6', '7', '8', '9', '10', 'jack', 'queen', 'king', 'ace']
 
-interface ILevelBox {
+interface LevelBox {
     level: string
     cards: number
 }
 
-const levelBox: ILevelBox[] = [
+const levelBox: LevelBox[] = [
     {
         level: 'light',
         cards: 6,
@@ -40,14 +40,14 @@ const levelBox: ILevelBox[] = [
     },
 ]
 
-interface IResult {
+interface Result {
     status?: string
     text?: string
     src?: string
     time?: string | null
 }
 
-const result: IResult[] = [
+const result: Result[] = [
     {
         status: 'win',
         text: 'Вы выиграли!',
@@ -61,7 +61,26 @@ const result: IResult[] = [
     { time: null },
 ]
 
-const gameData: IWindow = {
+type Data = [
+    {
+        [key: string | number]: string | number | null
+    }
+]
+
+type Func = (container: HTMLElement, data?: Data) => void
+
+interface Blocks {
+    [key: string]: Func
+}
+const blocks: Blocks = {}
+
+interface Screens {
+    [key: string]: Func
+}
+
+const screens: Screens = {}
+
+const gameData: Window = {
     suits: suits,
     rank: rank,
     hasFlippedCard: false,
@@ -72,8 +91,8 @@ const gameData: IWindow = {
     result: result,
     level: null,
     timers: [],
-    blocks: {},
-    screens: {},
+    blocks: blocks,
+    screens: screens,
     renderScreen: function () {},
     renderBlock: function () {},
 }
