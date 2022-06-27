@@ -1,29 +1,7 @@
 declare const window: any
 
-interface Window {
-    suits: string[]
-    rank: string[]
-    hasFlippedCard: boolean
-    lockBoard: boolean
-    firstCard: null | HTMLElement
-    secondCard: null | HTMLElement
-    levelBox: LevelBox[]
-    result: Result[]
-    level: null | number
-    timers: NodeJS.Timer[]
-    blocks: Blocks
-    screens: Screens
-    renderScreen: any
-    renderBlock: any
-}
-
 const suits = ['diamonds', 'hearts', 'spades', 'clubs']
 const rank = ['6', '7', '8', '9', '10', 'jack', 'queen', 'king', 'ace']
-
-interface LevelBox {
-    level: string
-    cards: number
-}
 
 const levelBox: LevelBox[] = [
     {
@@ -40,14 +18,7 @@ const levelBox: LevelBox[] = [
     },
 ]
 
-interface Result {
-    status?: string
-    text?: string
-    src?: string
-    time?: string | null
-}
-
-const result: Result[] = [
+const result: GameResult[] = [
     {
         status: 'win',
         text: 'Вы выиграли!',
@@ -61,26 +32,11 @@ const result: Result[] = [
     { time: null },
 ]
 
-type Data = [
-    {
-        [key: string | number]: string | number | null
-    }
-]
-
-type Func = (container: HTMLElement, data?: Data) => void
-
-interface Blocks {
-    [key: string]: Func
-}
 const blocks: Blocks = {}
-
-interface Screens {
-    [key: string]: Func
-}
 
 const screens: Screens = {}
 
-const gameData: Window = {
+const gameData: GameData = {
     suits: suits,
     rank: rank,
     hasFlippedCard: false,

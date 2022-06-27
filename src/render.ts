@@ -3,7 +3,7 @@ import { resetAllTimers } from './function/gameFunctions'
 
 export function renderBlock(
     block: string,
-    container?: HTMLElement,
+    container: HTMLElement,
     data?: any
 ) {
     if (!gameData.blocks[block]) {

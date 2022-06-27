@@ -2,8 +2,11 @@ import { renderBlock } from '../render'
 import gameData from '../game-data'
 import { checkResult } from '../function/gameFunctions'
 
-function renderGameFontFaceScreen() {
-    const container = document.getElementById('container') as HTMLElement
+const renderGameFontFaceScreen: CreateScreenFunc = function (): void {
+    const container = document.getElementById('container')
+
+    if (container === null) return
+
     container.textContent = ''
 
     const gameAttributes = document.createElement('section')
@@ -22,15 +25,18 @@ function renderGameFontFaceScreen() {
 
 gameData.screens['game-fontFace'] = renderGameFontFaceScreen
 
-function renderResultScreen(resultData: any) {
-    const container = document.getElementById('container') as HTMLElement
+const renderResultScreen: CreateScreenFunc = function (
+    resultData?: Data
+): void {
+    const container = document.getElementById('container')
+
+    if (container === null) return
 
     renderBlock('result-block', container, resultData)
 
-    const resultContainer = document.getElementById(
-        'result-item'
-    ) as HTMLElement
+    const resultContainer = document.getElementById('result-item')
 
+    if (resultContainer === null) return
     renderBlock('result-button', resultContainer)
 }
 

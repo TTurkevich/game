@@ -23,18 +23,21 @@ import {
 import { templateEngine } from './function/templating'
 import { renderScreen } from './render'
 
-function renderStartShell(container?: HTMLElement) {
-    container?.appendChild(templateEngine(startShellTemplate()))
+const renderStartShell: CreateBlockFunc = function (
+    container: HTMLElement
+): void {
+    container.appendChild(templateEngine(startShellTemplate()))
 }
 
 gameData.blocks['start-shell'] = renderStartShell
 
-function renderStartLevelBlock(container?: HTMLElement) {
-    container?.appendChild(templateEngine(startLevelBlockTemplate()))
+const renderStartLevelBlock: CreateBlockFunc = function (
+    container: HTMLElement
+): void {
+    container.appendChild(templateEngine(startLevelBlockTemplate()))
 
-    const levelButtons = document.querySelectorAll(
-        '[data-level]'
-    ) as NodeListOf<HTMLElement>
+    const levelButtons: NodeListOf<HTMLElement> =
+        document.querySelectorAll('[data-level]')
 
     levelButtons.forEach((levelButton) =>
         levelButton.addEventListener('click', () => setLevelGame(levelButton))
@@ -43,11 +46,13 @@ function renderStartLevelBlock(container?: HTMLElement) {
 
 gameData.blocks['start-level'] = renderStartLevelBlock
 
-function renderStartButton(container?: HTMLElement) {
-    container?.appendChild(templateEngine(startButtonTemplate()))
+const renderStartButton: CreateBlockFunc = function (
+    container: HTMLElement
+): void {
+    container.appendChild(templateEngine(startButtonTemplate()))
 
-    const start = document.getElementById('start-button') as HTMLButtonElement
-    start.addEventListener('click', function () {
+    const start = document.getElementById('start-button')
+    start?.addEventListener('click', function () {
         startGame()
 
         setTimeout(getTime, 5000)
@@ -56,35 +61,39 @@ function renderStartButton(container?: HTMLElement) {
 
 gameData.blocks['start-button'] = renderStartButton
 
-function renderGameCardsFrontFace(container?: HTMLElement) {
-    const memoryGame = document.createElement('section')
-    memoryGame.classList.add('memory-game')
-    memoryGame.setAttribute('id', 'memory-game')
-    container?.appendChild(memoryGame)
+const renderGameCardsFrontFace: CreateBlockFunc =
+    function renderGameCardsFrontFace(container: HTMLElement): void {
+        const memoryGame = document.createElement('section')
+        memoryGame.classList.add('memory-game')
+        memoryGame.setAttribute('id', 'memory-game')
+        container.appendChild(memoryGame)
 
-    makeFrontFaceCards(memoryGame)
+        makeFrontFaceCards(memoryGame)
 
-    const cards = document.querySelectorAll(
-        '[data-rank]'
-    ) as NodeListOf<Element>
+        const cards: NodeListOf<HTMLElement> =
+            document.querySelectorAll('[data-rank]')
 
-    shuffle(cards)
+        shuffle(cards)
 
-    cards.forEach(function (card) {
-        setTimeout(removeClassFlip, 5000, card)
-    })
+        cards.forEach(function (card) {
+            setTimeout(removeClassFlip, 5000, card)
+        })
 
-    cards.forEach((card) => card.addEventListener('click', flipCard))
-}
+        cards.forEach((card) =>
+            card.addEventListener('click', () => flipCard(card))
+        )
+    }
 
 gameData.blocks['game-CardsFrontFace'] = renderGameCardsFrontFace
 
-function renderGameButton(container?: HTMLElement) {
-    container?.appendChild(templateEngine(gameButtonTemplate()))
+const renderGameButton: CreateBlockFunc = function (
+    container: HTMLElement
+): void {
+    container.appendChild(templateEngine(gameButtonTemplate()))
 
-    const restart = document.getElementById('restart') as HTMLButtonElement
+    const restart = document.getElementById('restart')
 
-    restart.addEventListener('click', function () {
+    restart?.addEventListener('click', function () {
         startGame()
         setTimeout(getTime, 5000)
     })
@@ -92,24 +101,31 @@ function renderGameButton(container?: HTMLElement) {
 
 gameData.blocks['game-button'] = renderGameButton
 
-function renderGameTimer(container?: HTMLElement) {
-    container?.appendChild(templateEngine(gameTimerTemplate()))
+const renderGameTimer: CreateBlockFunc = function (
+    container: HTMLElement
+): void {
+    container.appendChild(templateEngine(gameTimerTemplate()))
 }
 
 gameData.blocks['game-timer'] = renderGameTimer
 
-function renderResultBlock(container?: HTMLElement, resultData?: any) {
-    container?.appendChild(templateEngine(resultTemplate(resultData)))
+const renderResultBlock: CreateBlockFunc = function (
+    container: HTMLElement,
+    resultData?: Data
+): void {
+    container.appendChild(templateEngine(resultTemplate(resultData)))
 }
 
 gameData.blocks['result-block'] = renderResultBlock
 
-function renderResultButton(container?: HTMLElement) {
-    container?.appendChild(templateEngine(resetButtonTemplate()))
+const renderResultButton: CreateBlockFunc = function (
+    container: HTMLElement
+): void {
+    container.appendChild(templateEngine(resetButtonTemplate()))
 
-    const reset = document.getElementById('reset') as HTMLButtonElement
+    const reset = document.getElementById('reset')
 
-    reset.addEventListener('click', function () {
+    reset?.addEventListener('click', function () {
         resetAllTimers()
         renderScreen('start')
     })

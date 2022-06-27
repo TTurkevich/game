@@ -28,12 +28,6 @@ export function startGame() {
 function findFrontFaceCard() {
     let newSrc: string
 
-    interface DataEntry {
-        suits: string
-        rank: string
-        newSrc: string
-    }
-
     const dataEntry: DataEntry[] = []
 
     for (let i = 0; i < gameData.suits.length; i++) {
@@ -74,32 +68,34 @@ export function makeFrontFaceCards(container: HTMLElement) {
     }
 }
 
-export function shuffle(cards: NodeList) {
+export function shuffle(cards: NodeListOf<HTMLElement>) {
     if (gameData.level !== null) {
         const deckOfCards = gameData.level
-        cards.forEach((card: any) => {
+
+        cards.forEach((card) => {
             let randomPos: number = Math.floor(Math.random() * deckOfCards)
-            card.style.order = randomPos
+            card.style.order = `${randomPos}`
         })
     }
 }
 
-export function flipCard(this: HTMLElement) {
+export function flipCard(card: HTMLElement) {
+   
     if (gameData.lockBoard) return
-    if (this === gameData.firstCard) return
-    if (this.classList.contains('flip')) {
+    if (card === gameData.firstCard) return
+    if (card.classList.contains('flip')) {
         alert('на перевернутых картах все могут...')
         return
     }
 
-    this.classList.add('flip')
+    card.classList.add('flip')
 
     if (!gameData.hasFlippedCard) {
         gameData.hasFlippedCard = true
-        gameData.firstCard = this
+        gameData.firstCard = card
         return
     }
-    gameData.secondCard = this
+    gameData.secondCard = card
     gameData.lockBoard = true
 
     checkForMatch()
@@ -114,8 +110,8 @@ function checkForMatch() {
 }
 
 function disableCards() {
-    gameData.firstCard?.removeEventListener('click', flipCard)
-    gameData.secondCard?.removeEventListener('click', flipCard)
+    gameData.firstCard?.removeEventListener('click', () => flipCard)
+    gameData.secondCard?.removeEventListener('click', () => flipCard)
 
     resetBoard()
 }
@@ -160,15 +156,19 @@ function tick(date: Date) {
     parts[0] = parts[0].length === 1 ? '0' + parts[0] : parts[0]
     parts[1] = parts[1].length === 1 ? '0' + parts[1] : parts[1]
 
-    const timer = document.getElementById('user-time') as HTMLElement
+    const timer = document.getElementById('user-time')
 
-    timer.textContent = parts.join('.')
+    if (timer !== null) {
+        timer.textContent = parts.join('.')
+    }
 }
 
 function getTimeGame() {
-    const timer = document.getElementById('user-time') as HTMLElement
+    const timer = document.getElementById('user-time')
 
-    gameData.result[2].time = timer.textContent
+    if (timer !== null) {
+        gameData.result[2].time = timer.textContent
+    }
 }
 
 export function checkResult() {
