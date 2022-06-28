@@ -1,3 +1,5 @@
+import gameData from '../game-data'
+
 export function startLevelBlockTemplate() {
     return {
         tag: 'div',
@@ -65,7 +67,7 @@ export function startShellTemplate() {
     }
 }
 
-export function gameCardsFrontFaceTemplate(data) {
+export function gameCardsFrontFaceTemplate(data: any) {
     return {
         tag: 'div',
         cls: ['memory-card', 'flip'],
@@ -144,6 +146,60 @@ export function gameTimerTemplate() {
     }
 }
 
+export function resultTemplate(data: any) {
+    return {
+        tag: 'section',
+        cls: 'result-container',
+        attrs: {
+            id: 'result-container',
+        },
+        content: [
+            {
+                tag: 'div',
+                cls: 'result-item',
+                attrs: {
+                    id: 'result-item',
+                },
+                content: [
+                    {
+                        tag: 'img',
+                        cls: 'result-item-img',
+                        attrs: {
+                            src: data.src,
+                        },
+                    },
+                    {
+                        tag: 'h1',
+                        cls: 'result-item-title',
+                        content: data.text,
+                    },
+                    {
+                        tag: 'h2',
+                        cls: 'result-item-text',
+                        content: 'Затраченное время:',
+                    },
+                    {
+                        tag: 'h2',
+                        cls: 'result-item-time',
+                        content: gameData.result[2].time,
+                    },
+                ],
+            },
+        ],
+    }
+}
+
+export function resetButtonTemplate() {
+    return {
+        tag: 'button',
+        cls: ['button', 'reset'],
+        attrs: {
+            id: 'reset',
+        },
+        content: 'Играть снова',
+    }
+}
+
 export default {
     startLevelBlockTemplate,
     startButtonTemplate,
@@ -151,4 +207,5 @@ export default {
     gameCardsFrontFaceTemplate,
     gameButtonTemplate,
     gameTimerTemplate,
+    resetButtonTemplate,
 }

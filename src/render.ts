@@ -1,16 +1,20 @@
-import gameData from './game-data.js'
-import { resetAllTimers } from './function/gameFunctions.js'
+import gameData from './game-data'
+import { resetAllTimers } from './function/gameFunctions'
 
-export function renderBlock(block, container, src, alt, data) {
+export function renderBlock(
+    block: string,
+    container: HTMLElement,
+    data?: any
+) {
     if (!gameData.blocks[block]) {
         console.log('no block')
     } else {
         gameData.renderBlock[block] = gameData.blocks[block]
-        gameData.renderBlock[block](container, src, alt, data)
+        gameData.renderBlock[block](container, data)
     }
 }
 
-export function renderScreen(screen, data) {
+export function renderScreen(screen: string, data?: any) {
     resetAllTimers()
 
     if (!gameData.screens[screen]) {
