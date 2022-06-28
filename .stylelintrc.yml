@@ -1,0 +1,20 @@
+{
+    'extends':
+        [
+            'stylelint-config-standard-scss',
+            'stylelint-config-prettier',
+            'stylelint-prettier/recommended',
+        ],
+    'files': ['/**/*{.css,.scss}'],
+    'rules':
+        {
+            'scss/dollar-variable-pattern': null,
+            'max-nesting-depth': 5,
+            'selector-max-compound-selectors': 6,
+            'selector-no-qualifying-type':
+                [true, { 'ignore': ['attribute', 'class', 'id'] }],
+            'selector-max-id': 1,
+            'no-extra-semicolons': true,
+            'value-no-vendor-prefix': [true, { 'ignoreValues': ['string'] }],
+        },
+}
