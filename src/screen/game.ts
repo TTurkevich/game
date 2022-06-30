@@ -1,6 +1,6 @@
 import { renderBlock } from '../render'
-import gameData from '../game-data'
-import { checkResult } from '../function/gameFunctions'
+import gameData from '../game-state'
+import { checkResult } from '../helpers/gameFunctions'
 
 const renderGameFontFaceScreen: CreateScreenFunc = function (): void {
     const container = document.getElementById('container')

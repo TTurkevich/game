@@ -22,12 +22,12 @@ const result: GameResult[] = [
     {
         status: 'win',
         text: 'Вы выиграли!',
-        src: './css/img/win.png',
+        src: './static/img/win.png',
     },
     {
         status: 'lose',
         text: 'Вы проиграли!',
-        src: './css/img/lose.png',
+        src: './static/img/lose.png',
     },
     { time: null },
 ]

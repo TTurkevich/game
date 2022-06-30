@@ -1,4 +1,4 @@
-import gameData from '../game-data'
+import gameData from '../game-state'
 import { gameCardsFrontFaceTemplate } from './templateItem'
 import { renderScreen } from '../render'
 import { templateEngine } from './templating'
@@ -33,7 +33,7 @@ function findFrontFaceCard() {
     for (let i = 0; i < gameData.suits.length; i++) {
         for (let j = 0; j < gameData.rank.length; j++) {
             newSrc =
-                './css/img/cards/' +
+                './static/img/cards/' +
                 gameData.rank[j] +
                 '-' +
                 gameData.suits[i] +
