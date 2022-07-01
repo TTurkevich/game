@@ -9,7 +9,7 @@
 
 @font-face {
     font-family: 'Stratos LC Web';
-    src: url('./stratos/StratosLCWeb-Regular.ttf');
+    src: url('../static/stratos/StratosLCWeb-Regular.ttf');
 }
 
 .center {
@@ -250,5 +250,3 @@ body {
         transition: all 1s ease-out;
     }
 }
-
-

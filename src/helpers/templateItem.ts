@@ -1,4 +1,4 @@
-import gameData from '../game-data'
+import gameData from '../game-state'
 
 export function startLevelBlockTemplate() {
     return {
@@ -88,7 +88,7 @@ export function gameCardsFrontFaceTemplate(data: any) {
                 tag: 'img',
                 cls: 'back-face',
                 attrs: {
-                    src: './css/img/back.png',
+                    src: './static/img/back.png',
                     alt: 'memory card',
                 },
             },

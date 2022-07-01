@@ -1,4 +1,4 @@
-import gameData from './game-data'
+import gameData from './game-state'
 import {
     setLevelGame,
     startGame,
@@ -8,7 +8,7 @@ import {
     getTime,
     removeClassFlip,
     resetAllTimers,
-} from './function/gameFunctions'
+} from './helpers/gameFunctions'
 
 import {
     startLevelBlockTemplate,
@@ -18,9 +18,9 @@ import {
     gameTimerTemplate,
     resultTemplate,
     resetButtonTemplate,
-} from './function/templateItem'
+} from './helpers/templateItem'
 
-import { templateEngine } from './function/templating'
+import { templateEngine } from './helpers/templating'
 import { renderScreen } from './render'
 
 const renderStartShell: CreateBlockFunc = function (

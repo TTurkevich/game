@@ -14,5 +14,3 @@
 ---
 Проект собирает `webpack`
 
-
-Следующие файлы добавлены исключительно в учебно-ознакомительных целях: `.eslintrc`, `.gitignore`, `.prettierrc`, `.stylelintrc`, `package-lock.json`, `package.json`, `tsconfig.json`, `webpack.config.js`

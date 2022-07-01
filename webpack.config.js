@@ -48,14 +48,7 @@ module.exports = {
     },
     plugins: [
         new CopyPlugin({
-            patterns: [
-                { from: './src/css/img', to: 'css/img' },
-                {
-                    from: './src/css/stratos/StratosLCWeb-Regular.ttf',
-                    to: 'css/stratos',
-                },
-                { from: './src/css/favicon.ico', to: 'css' },
-            ],
+            patterns: [{ from: './src/static', to: 'static' }],
         }),
         new HtmlWebpackPlugin({
             template: './src/index.html',

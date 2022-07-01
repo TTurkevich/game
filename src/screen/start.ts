@@ -1,5 +1,5 @@
 import { renderBlock, renderScreen } from '../render'
-import gameData from '../game-data'
+import gameData from '../game-state'
 
 const renderStartScreen: CreateScreenFunc = function (): void {
     const container = document.getElementById('container')
