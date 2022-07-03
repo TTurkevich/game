@@ -21,4 +21,4 @@ const renderStartScreen: CreateScreenFunc = function (): void {
 
 gameData.screens['start'] = renderStartScreen
 
-renderScreen('start')
+

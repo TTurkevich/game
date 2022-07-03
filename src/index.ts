@@ -8,3 +8,7 @@ import './screen/start'
 import './screen/game'
 import './css/style.css'
 declare const gameData: any
+
+import { renderBlock, renderScreen } from './render'
+
+renderScreen('start')
